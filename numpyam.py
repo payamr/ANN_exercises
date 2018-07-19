@@ -24,6 +24,10 @@ def mean_cost(Y, Y_hat): # Y (N*1) is NOT hot encoded, Y_hat (N*K) is probabilit
     J_mean = np.average( -np.log(Y_hat[np.arange(N), Y]) )
     return J_mean
 
+def classification_rate(Y_pred, Y): #returns num_correct/ num_all, Y and Y_pred are single column, containing the index of the class. They are NOT one_hot_encoded
+    return float(np.sum(Y_pred == Y)) / len(Y)
+
+
 # sigmoid derivatives
     
 # in this case i is the randomly chosen data point that must be passed along to all the gradients
