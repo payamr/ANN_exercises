@@ -22,7 +22,7 @@ def get_normalized_data(s): #s = 'train' or 'test'
     # https://www.kaggle.com/c/digit-recognizer/
     # train data has 785 columns (28*28)+ 1 label
     # test data has 784 colums 
-    path_dir = 'C:\\Users\\Payam\\Dropbox\\LazyProgrammerCourses-Mycodes\\ANN\\digits\\' 
+    path_dir = 'C:\\Users\\digits\\' 
     if s == 'train':
         df = pd.read_csv(path_dir+s+'.csv')
         data = df.values
