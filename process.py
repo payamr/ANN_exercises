@@ -46,5 +46,39 @@ def get_normalized_data(s): #s = 'train' or 'test'
     else:
         print("File doesn't exist!")
         return None, None
+    
+
+
+def get_face_Data(balance_ones=True):
+    # images are 48x48 = 2304 size vectors
+    # opens data corresonding to kaggle's Facial Expression Recognition Challenge
+    # https://www.kaggle.com/c/challenges-in-representation-learning-facial-expression-recognition-challenge/
+    # data has 3 columns, first is label with 7 states
+    # second is 2304 pixel data separated with spaces
+    # third says whether the row is training or test
+    data_path = "C:\\Users\\Payam\\Dropbox\\LazyProgrammerCourses-Mycodes\\ANN\\fer2013\\"
+    Y = []
+    X = []
+    first = True
+    for line in open(data_path+'fer2013.csv'):
+        if first:
+            first = False
+        else:
+            row = line.split(',')
+            Y.append(int(row[0]))
+            X.append([int(p) for p in row[1].split()])
+
+    X, Y = np.array(X) / 255.0, np.array(Y)
+
+    if balance_ones:
+        # balance the 1 class
+        X0, Y0 = X[Y!=1, :], Y[Y!=1]
+        X1 = X[Y==1, :]
+        X1 = np.repeat(X1, 9, axis=0)
+        X = np.vstack([X0, X1])
+        Y = np.concatenate((Y0, [1]*len(X1)))
+
+    return X, Y
+        
         
 
